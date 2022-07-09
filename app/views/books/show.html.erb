@@ -27,9 +27,12 @@
                   <% end %>
                 </td>
                 <td><%= @book.body %></td>
-                <td>
+                  <td class ="comments-count">コメント数：<%= @book.book_comments.count %></td>
+                   <%= render 'favorites/favorite', book: @book %>
+                   
                   <% if @book.user == current_user %>
                   <%= link_to "Edit", edit_book_path, class: 'btn btn-sm btn-success' %>
+                  </tr>
                   <% end %>
                 </td>
                 <td>
@@ -37,9 +40,14 @@
                     <%= link_to "Destroy", book_path(@book), method: :delete, class: 'btn btn-sm btn-danger' %>
                   <% end %>
                 </td>
-              </tr>
-            </tbody>
-          </table>
+                
+         </tr>
+        </table>
+       <h3>Comments</h3>
+        <table class='table'>
+        <%= render "book_comments/comment_index" , book: @book %>
+      </table>
+     <p><%= render "book_comments/comment_form" , book: @book, book_comment: @book_comment %></p>
         </div>
       </div>
     </div>
